@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pra Minha Garota ❤️</title>
+  <style>
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #ffe6f0, #fff);
+      color: #333;
+      overflow: hidden;
+      text-align: center;
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      padding: 50px 20px;
+    }
+    h1 {
+      font-size: 3em;
+      color: #e60073;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.2em;
+      margin: 20px auto;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 1.1em;
+      margin: 15px;
+      color: white; background-color: #ff66b2;
+      border: none; border-radius: 10px;
+      cursor: pointer; transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #e60073;
+    }
+    .hidden {
+      display: none;
+      margin-top: 30px;
+      font-size: 1.3em;
+      color: #d63384;
+    }
+    .hearts, .cars {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
+    }
+    .heart, .car {
+      position: absolute;
+      width: 30px; height: 30px;
+      opacity: 0.8;
+    }
+    .heart {
+      background: red;
+      transform: rotate(45deg);
+      animation: floatHeart 8s linear infinite;
+    }
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 30px; height: 30px;
+      background: red;
+      border-radius: 50%;
+    }
+    .heart::before { top: -15px; left: 0; }
+    .heart::after { left: -15px; top: 0; }
+    @keyframes floatHeart {
+      0%   { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+    }
+    .car {
+      width: 60px; height: auto;
+      animation: floatCar 12s linear infinite;
+    }
+    @keyframes floatCar {
+      0%   { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
+    }
+    audio {
+      display: none;
+    }
+    .music-btn {
+      position: fixed; bottom: 20px; right: 20px;
+      background: #ff66b2; border: none;
+      width: 60px; height: 60px; border-radius: 50%;
+      cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      font-size: 2em; color: white;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="bg-music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_4c6b71df02.mp3?filename=romantic-piano-11249.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <button class="music-btn" onclick="toggleMusic()" title="Tocar / Pausar">🔊</button>
+
+  <div class="hearts"></div>
+  <div class="cars"></div>
+
+  <div class="container">
+    <h1>Oi, minha garota ❤️</h1>
+    <p>Você é o amor da minha vida, meu sol nos dias nublados e a estrela que ilumina meus sonhos.</p>
+    <button onclick="reveal1()">Revelar mensagem 1</button>
+    <div class="hidden" id="msg1">
+      Desde o instante em que te vi, meu mundo fez sentido e eu sou eternamente grato por cada segundo ao seu lado. 💖
+    </div>
+
+    <button onclick="reveal2()">Revelar mensagem 2</button>
+    <div class="hidden" id="msg2">
+      Você encanta meu coração com seu sorriso, seu abraço e até com seu gosto por carros – adoro nosso sonho de aventuras sobre rodas. 🚗💕
+    </div>
+  </div>
+
+  <script>
+    // Corações
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = `${Math.random()*100}vw`;
+      heart.style.animationDuration = `${5 + Math.random()*5}s`;
+      heart.style.opacity = Math.random();
+      document.querySelector('.hearts').appendChild(heart);
+    }
+
+    // Carros
+    const carImg = 'https://i.imgur.com/7w9SLGN.png';
+    for (let i = 0; i < 10; i++) {
+      const car = document.createElement('img');
+      car.src = carImg;
+      car.className = 'car';
+      car.style.left = `${Math.random()*100}vw`;
+      car.style.animationDuration = `${8 + Math.random()*10}s`;
+      car.style.opacity = 0.7;
+      document.querySelector('.cars').appendChild(car);
+    }
+
+    // Mensagens
+    function reveal1() { document.getElementById('msg1').style.display = 'block'; }
+    function reveal2() { document.getElementById('msg2').style.display = 'block'; }
+
+    // Música
+    const music = document.getElementById('bg-music');
+    let playing = false;
+    function toggleMusic() {
+      if (playing) { music.pause(); playing = false; }
+      else { music.play(); playing = true; }
+    }
+  </script>
+
+</body>
+</html>
